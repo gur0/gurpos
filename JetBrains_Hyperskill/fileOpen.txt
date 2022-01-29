@@ -1,0 +1,22 @@
+my_file = open('my_file.txt')
+
+my_file_mode = open('my_file.txt', 'w')
+
+# UTF-8
+file_utf8 = open('my_file.txt', encoding='utf-8')
+
+# UTF-16
+file_utf16 = open('my_file.txt', encoding='utf-16')
+
+# CP1252
+file_cp1252 = open('my_file.txt', encoding='cp1252')
+
+# closing the file
+my_file.close()
+
+
+====
+
+# write your code here
+test_file = open('stars.txt', 'w', encoding='utf-16')
+test_file.close()

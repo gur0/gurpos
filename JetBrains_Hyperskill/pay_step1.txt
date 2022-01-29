@@ -1,0 +1,44 @@
+principal = int(input("Enter the loan principal:\n"))
+
+print("What do you want to calculate?")
+print('type "m" for number of monthly payments,')
+print('type "p" for the monthly payment\n')
+method = input()  # m or p
+
+num_month = 1
+amount = 1
+
+if method == 'p':
+    num_month = int(input("Enter the number of months:\n"))
+elif method == 'm': 
+    amount = int(input("Enter the monthly payment:\n"))
+
+remain_0 = False
+def monthly_value():
+    global remain_0
+    global amount
+    if principal % num_month == 0:
+        remain_0 = True
+        amount = int(principal / num_month)
+        return amount
+    amount = int(principal // num_month) + 1
+    return amount
+
+def months():
+    if principal % amount == 0:
+        return int(principal / amount)
+    return int(principal // amount) + 1
+    
+def last_payment():
+    return (principal - (months() - 1) * monthly_value())
+
+if method == 'm':
+    if months() > 1:
+        print('It will take %d months to repay the loan' % months())
+    elif months() == 1:
+        print('It will take %d month to repay the loan' % months())
+elif method == 'p':
+    if remain_0 == True:
+        print('Your monthly payment =', str(monthly_value()))
+    else:
+        print('Your monthly payment =', str(monthly_value()), 'and the last payment = %d.' % last_payment())

@@ -1,0 +1,47 @@
+import math
+
+print('What do you want to calculate?')
+print('type "n" for number of monthly payments,')
+print('type "a" for annuity monthly payment amount,')
+print('type "p" for loan principal:')
+
+def calc_loan_duration(p1, a1, i1):
+    n1 = math.log(a1 / (a1 - i1 * p1), 1 + i1)
+    return n1
+    
+def calc_monthly_payment(p1, r1, i1):
+    a1 = p1 * i1 * math.pow((1 + i1), r1) / (math.pow((1 + i1), r1) - 1)
+    return math.ceil(a1)
+
+def calc_loan_principal(a1, r1, i1):
+    p1 = a1 / (i1 * math.pow((1 + i1), r1) / (math.pow((1 + i1), r1) - 1))
+    return p1
+    
+c = input()
+if c == 'n':
+    p = int(input("Enter the loan principal:\n"))  # 1000000
+    m = int(input("Enter the monthly payment:\n"))  # 15000
+    i = float(input("Enter the loan interest:\n"))  # 10
+    t = calc_loan_duration(p, m, i / 1200)
+    y = int(t // 12)
+    s = math.ceil(t - y * 12)
+    if s == 12:
+        y += 1
+        s = 0
+    if s == 0:
+        print(f'It will take {y} years to repay this loan!')
+    else:
+        print(f'It will take {y} years and {s} months to repay this loan!')
+elif c == 'a':
+    p = int(input("Enter the loan principal:\n"))  # 1000000
+    r = int(input("Enter the number of periods:\n"))  # 60
+    i = float(input("Enter the loan interest:\n"))  # 10
+    t = calc_monthly_payment(p, r, i / 1200)
+    print(f'Your monthly payment = {t}!')
+elif c == 'p':
+    a = float(input("Enter the annuity payment:\n"))  # 8721.8
+    r = int(input("Enter the number of periods:\n"))  # 120
+    i = float(input("Enter the loan interest:\n"))  # 5.6
+    t = calc_loan_principal(a, r, i / 1200)
+    print(f'Your loan principal = {t}!')
+
